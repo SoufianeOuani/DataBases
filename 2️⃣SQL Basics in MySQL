@@ -1,0 +1,94 @@
+📌 Creating Databases and Tables in MySQL
+Before storing data, we need to create a database and tables to structure our information.
+
+✅ Creating a Database
+ ___________________________________________
+|  CREATE DATABASE shop;                    |
+|  USE shop;  -- Select the database to use |
+|___________________________________________|
+
+
+✅ Creating a Table
+__________________________________________
+|  CREATE TABLE customers (               |
+|      id INT AUTO_INCREMENT PRIMARY KEY, |
+|      name VARCHAR(50),                  |
+|      email VARCHAR(100) UNIQUE,         |
+|      age INT                            |
+|  );                                     | 
+|_________________________________________|
+
+
+
+
+📌 SQL Commands: SELECT, INSERT, UPDATE, DELETE
+These commands help us manipulate data in the database.
+
+✅ Inserting Data (INSERT INTO)
+ _________________________________________________
+|  INSERT INTO customers (name, email, age)       |
+|  VALUES ('Soufiane', 'soufiane@example.com', 21); |
+|_________________________________________________|
+
+✅ Retrieving Data (SELECT)
+ ____________________________________________________________________________________________
+|SELECT * FROM customers;  -- Select all customers                                           |
+|SELECT name, email FROM customers WHERE age > 18;  -- Select specific columns with condition|
+|____________________________________________________________________________________________|
+
+✅ Updating Data (UPDATE)
+ _________________________
+|  UPDATE customers       |
+|  SET age = 22           |
+|  WHERE name = 'Soufiane';|
+|_________________________|
+
+✅ Deleting Data (DELETE)
+
+ _________________________________________________
+|  DELETE FROM customers WHERE name = 'Soufiane';  |
+|_________________________________________________|
+
+
+📌 Filters Using WHERE, LIKE, IN, BETWEEN
+Filters help refine search results based on conditions.
+
+✅ Using WHERE with Comparison Operators
+
+ ___________________________________________
+|  SELECT * FROM customers WHERE age > 18;  |
+|___________________________________________|
+
+
+✅ Using LIKE for Pattern Matching
+ _____________________________________________________________________________________________
+|  SELECT * FROM customers WHERE name LIKE 'S%';  -- Names starting with 'S'                  |
+|  SELECT * FROM customers WHERE email LIKE '%@gmail.com';  -- Emails ending with @gmail.com  |
+|_____________________________________________________________________________________________|
+
+
+✅ Using IN for Multiple Values
+ _____________________________________________________
+|                                                     |
+|  SELECT * FROM customers WHERE age IN (18, 21, 25); |
+|_____________________________________________________|
+
+
+✅ Using BETWEEN for Ranges
+ ________________________________________________________
+|  SELECT * FROM customers WHERE age BETWEEN 18 AND 25;  |
+|________________________________________________________|
+
+
+📌 Sorting Results Using ORDER BY
+Sorting helps organize query results based on a specified column.
+
+✅ Sorting in Ascending (Default) Order
+ _________________________________________
+|  SELECT * FROM customers ORDER BY name; |
+|_________________________________________|
+
+✅ Sorting in Descending Order
+ ______________________________________________
+|  SELECT * FROM customers ORDER BY age DESC;  |
+|______________________________________________|
