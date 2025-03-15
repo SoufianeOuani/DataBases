@@ -1,0 +1,25 @@
+📌 Definition of Databases
+A database is an organized collection of data that allows users to store, manage, and retrieve information efficiently. Databases are used in almost every software application, from websites and mobile apps to enterprise systems.
+
+Databases store data in a structured way and provide mechanisms to ensure data consistency, integrity, and security.
+
+📌 Difference Between SQL and NoSQL
+Databases are broadly classified into SQL (Relational Databases) and NoSQL (Non-Relational Databases).
+_________________________________________________________________________________________________________
+Feature	SQL    |(Relational)	NoSQL                    |  (Non-Relational)                               |
+_________________________________________________________________________________________________________|
+Data Structure |  Structured (Tables)                  |  Flexible (Documents, Key-Value, Graph, Column) |
+_________________________________________________________________________________________________________|
+Schema	       |  Fixed schema required	               |  Schema-less (Dynamic)                          |
+_________________________________________________________________________________________________________|
+Scalability    |  Vertically scalable	                 |  Horizontally scalable                          |    
+_________________________________________________________________________________________________________|
+Examples	     |  MySQL, PostgreSQL, SQL Server        |  MongoDB, Firebase, Cassandra                   |
+_________________________________________________________________________________________________________|
+Best For	     |  Structured and complex relationships |  Large, flexible, and unstructured data         |
+_________________________________________________________________________________________________________|
+
+
+📌 When to Use SQL vs NoSQL?
+Use SQL Databases when data consistency and structured relationships are essential (e.g., Banking systems, E-commerce orders).
+Use NoSQL Databases when scalability and flexibility are more important (e.g., Real-time applications, Big Data, Social Media).
