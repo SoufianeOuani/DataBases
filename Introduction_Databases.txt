@@ -1,0 +1,41 @@
+1️⃣Introduction to MySQL
+	💠Definition of Databases
+	💠Difference Between SQL and NoSQL
+	💠Installing MySQL and Working with MySQL Workbench
+
+2️⃣SQL Basics in MySQL
+	💠Creating Databases and Tables
+	💠SQL Commands: SELECT, INSERT, UPDATE, DELETE
+	💠Filters Using WHERE, LIKE, IN, BETWEEN
+	💠Sorting Results Using ORDER BY
+
+3️⃣Relationships in MySQL
+	💠Concept of Relationships Between Tables
+	💠Primary Key and Foreign Key
+	💠Types of Relationships (One-to-One, One-to-Many, Many-to-Many)
+	💠Implementing Relationships Using JOIN (INNER, LEFT, RIGHT, FULL OUTER)
+
+4️⃣Functions and Variables in MySQL
+	💠Using Built-in Functions (COUNT, SUM, AVG, MIN, MAX)
+	💠String and Mathematical Functions
+	💠Creating and Storing Variables
+
+5️⃣Stored Procedures and Triggers
+	💠How to Create Stored Procedures
+	💠Difference Between Stored Procedures and Functions
+	💠Creating and Using Triggers in MySQL
+
+6️⃣Indexes and Performance Optimization
+	💠Role of Indexes in Query Optimization
+	💠Types of Indexes and How to Create Them
+	💠Analyzing Query Performance Using EXPLAIN
+
+7️⃣User Management and Permissions
+	💠Creating and Managing Users
+	💠Granting Permissions Using GRANT and REVOKE
+	💠Database Security Through Access Control
+
+8️⃣Backup and Restore
+💠How to Take a Backup Using mysqldump
+💠Restoring a Database from a Backup
+💠Handling Errors During Restoration
