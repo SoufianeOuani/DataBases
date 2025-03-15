@@ -1,0 +1,91 @@
+📌 Creating and Managing Users in MySQL
+MySQL allows administrators to create and manage users with different levels of access to the database. Proper user management enhances security and ensures that only authorized users can access or modify data.
+
+✅ Creating a New User
+By default, MySQL uses authentication and privileges to control user access.
+ _________________________________________________________________________
+|  CREATE USER 'john_doe'@'localhost' IDENTIFIED BY 'securepassword';     |
+|_________________________________________________________________________|
+🔹 'john_doe' is the username
+🔹 'localhost' means the user can connect only from the local machine
+🔹 'securepassword' is the user’s password
+
+✅ Viewing All Users
+To see existing users:
+ ________________________________________________________________________________________
+|  SELECT user, host FROM mysql.user;                                                    |
+|________________________________________________________________________________________|
+
+
+✅ Changing a User's Password
+ ________________________________________________________________________________________
+|  ALTER USER 'john_doe'@'localhost' IDENTIFIED BY 'newpassword';                        |
+|________________________________________________________________________________________|
+Or for older MySQL versions:
+ ________________________________________________________________________________________
+|  SET PASSWORD FOR 'john_doe'@'localhost' = PASSWORD('newpassword');                    |
+|________________________________________________________________________________________|
+
+
+✅ Deleting a User
+ ________________________________________________________________________________________
+|  DROP USER 'john_doe'@'localhost';                                                     |
+|________________________________________________________________________________________|
+🔹 This removes the user from the MySQL system.
+
+📌 Granting Permissions Using GRANT and REVOKE
+Permissions define what actions a user can perform on a database.
+
+✅ Granting Full Access to a Database
+ _______________________________________________________________________________________
+|  GRANT ALL PRIVILEGES ON my_database.* TO 'john_doe'@'localhost';                     |   
+|_______________________________________________________________________________________|
+🔹 This gives full access to my_database.
+
+✅ Granting Specific Permissions
+ ________________________________________________________________________________________
+|  GRANT SELECT, INSERT, UPDATE ON my_database.* TO 'john_doe'@'localhost';              |    
+|________________________________________________________________________________________|
+🔹 The user can only read, insert, and update data but cannot delete it.
+
+✅ Granting Table-Specific Permissions
+ ________________________________________________________________________________________
+|  GRANT SELECT ON my_database.customers TO 'john_doe'@'localhost';                      |
+|________________________________________________________________________________________|
+🔹 The user can only read data from the customers table.
+
+✅ Revoking Permissions
+To remove specific permissions:
+ ________________________________________________________________________________________
+|  REVOKE INSERT, UPDATE ON my_database.* FROM 'john_doe'@'localhost';                   | 
+|________________________________________________________________________________________|
+🔹 The user can no longer insert or update data but can still read it.
+
+To remove all permissions:
+ ________________________________________________________________________________________
+|  REVOKE ALL PRIVILEGES ON my_database.* FROM 'john_doe'@'localhost';                   | 
+|________________________________________________________________________________________|
+
+
+✅ Applying Permission Changes
+ ________________________________________________________________________________________
+|  FLUSH PRIVILEGES;                                                                       | 
+|________________________________________________________________________________________|
+🔹 This ensures all changes take effect immediately.
+
+📌 Database Security Through Access Control
+✅ Best Practices for Secure User Management
+🔹 Use Strong Passwords – Avoid simple passwords like "123456".
+🔹 Limit Privileges – Only give users the permissions they need.
+🔹 Use GRANT USAGE for Read-Only Users
+
+ ________________________________________________________________________________________
+|  GRANT USAGE ON my_database.* TO 'readonly_user'@'localhost';                          |  
+|________________________________________________________________________________________|
+🔹 Restrict Remote Access – Allow only localhost access unless necessary.
+🔹 Regularly Audit User Privileges – Check with:
+
+ ________________________________________________________________________________________
+|  SHOW GRANTS FOR 'john_doe'@'localhost';                                               | 
+|________________________________________________________________________________________|
+🔹 Use Encrypted Connections (SSL) for remote database access.
