@@ -1,0 +1,96 @@
+📌 How to Create Stored Procedures in MySQL
+A Stored Procedure is a reusable SQL block that performs specific tasks and can accept input parameters. It improves performance by reducing query execution time and helps maintain cleaner and more organized code.
+
+✅ Creating a Simple Stored Procedure
+ _______________________________________________________________________
+|  DELIMITER $$  -- Change delimiter to avoid conflicts with semicolons | 
+|                                                                       | 
+|  CREATE PROCEDURE GetAllCustomers()                                   |           
+|  BEGIN                                                                |
+|      SELECT * FROM customers;                                         |   
+|  END $$                                                               | 
+|                                                                       | 
+|  DELIMITER ;  -- Reset delimiter to default                           | 
+|_______________________________________________________________________|
+🔹 This procedure, when called, retrieves all customers from the database.
+
+
+✅ Calling a Stored Procedure
+ _________________________________________________________________________
+|  CALL GetAllCustomers();                                                |
+|_________________________________________________________________________|
+
+📌 Difference Between Stored Procedures and Functions
+ __________________________________________________________________________________________________________________________
+|  Feature            |  	Stored Procedure            	            |        Function                                      |  
+|_____________________|_____________________________________________|______________________________________________________|
+|  Returns a Value?	  |   No (Can return multiple results)	        |      Yes (Returns a single value)                    |
+|_____________________|_____________________________________________|______________________________________________________|
+|  Can Modify Data?   |   Yes (INSERT, UPDATE, DELETE)      	      |      No (Only for calculations)                      | 
+|_____________________|_____________________________________________|______________________________________________________|
+|  Used in Queries?   |   No, executed separately      	            |      Yes, can be used in SELECT statements           | 
+|_____________________|_____________________________________________|______________________________________________________|
+|  Example Use Case	  |   Updating multiple records, complex logic	|      Calculating the total price, applying discounts | 
+|_____________________|_____________________________________________|______________________________________________________|
+
+
+✅ Example: Creating a Function
+ _____________________________________________________
+|  DELIMITER $$                                       | 
+|                                                     | 
+|  CREATE FUNCTION GetCustomerCount() RETURNS INT     | 
+|  DETERMINISTIC                                      |
+|  BEGIN                                              |
+|      DECLARE total INT;                             | 
+|      SELECT COUNT(*) INTO total FROM customers;     | 
+|      RETURN total;                                  |
+|  END $$                                             | 
+|                                                     |   
+|  DELIMITER ;                                        |
+|_____________________________________________________|
+
+
+🔹 We can now use this function in a SELECT query:
+ __________________________________
+|  SELECT GetCustomerCount();      |
+|__________________________________|
+
+
+📌 Creating and Using Triggers in MySQL
+A Trigger is an SQL script that automatically executes when a specified event occurs in a table (e.g., INSERT, UPDATE, DELETE).
+
+✅ Creating a Trigger Before Insert
+ _________________________________________________________________________________________
+|  DELIMITER $$                                                                           | 
+|                                                                                         | 
+|  CREATE TRIGGER BeforeInsertCustomer                                                    |
+|  BEFORE INSERT ON customers                                                             | 
+|  FOR EACH ROW                                                                           | 
+|  BEGIN                                                                                  |
+|      SET NEW.name = UPPER(NEW.name);  -- Convert name to uppercase before inserting     | 
+|  END $$                                                                                 | 
+|                                                                                         | 
+|  DELIMITER ;                                                                            |
+|_________________________________________________________________________________________|
+🔹 This trigger ensures that all customer names are stored in uppercase before being inserted into the database.
+
+
+✅ Creating a Trigger After Delete (Logging Deleted Records)
+ _________________________________________________________________________________________
+|  DELIMITER $$                                                                           | 
+|                                                                                         | 
+|  CREATE TRIGGER AfterDeleteOrder                                                        |  
+|  AFTER DELETE ON orders                                                                 | 
+|  FOR EACH ROW                                                                           | 
+|  BEGIN                                                                                  |
+|      INSERT INTO order_logs (order_id, deleted_at) VALUES (OLD.id, NOW());              |  
+|  END $$                                                                                 |
+|                                                                                         | 
+|  DELIMITER ;                                                                            |
+|_________________________________________________________________________________________|
+🔹 Whenever an order is deleted, its id and deletion timestamp are stored in the order_logs table.
+
+📌 When to Use Triggers?
+✅ Data Validation – Prevent invalid data entry
+✅ Audit Logging – Track changes in critical tables
+✅ Automating Calculations – Update totals automatically
