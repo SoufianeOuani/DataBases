@@ -1,0 +1,127 @@
+📌 Concept of Relationships Between Tables
+In relational databases, relationships define how data in one table connects to data in another table. Instead of storing redundant data in multiple places, we use keys to establish relationships between tables.
+
+📌 Primary Key and Foreign Key
+
+✅ Primary Key (PK)
+A Primary Key is a unique identifier for each record in a table. It ensures that no duplicate values exist and that each row is uniquely identifiable.
+ _______________________________________________
+|  CREATE TABLE customers (                     |   
+|      id INT AUTO_INCREMENT PRIMARY KEY,       | 
+|      name VARCHAR(50),                        |
+|      email VARCHAR(100) UNIQUE                |
+|    );                                         |
+|_______________________________________________|
+
+✅ Foreign Key (FK)
+A Foreign Key is a column in one table that refers to the Primary Key of another table. It establishes a connection between the two tables.
+ __________________________________________________________
+|                                                          |
+|   CREATE TABLE orders (                                  |
+|       id INT AUTO_INCREMENT PRIMARY KEY,                 |
+|        customer_id INT,                                  |
+|       order_date DATE,                                   |
+|       FOREIGN KEY (customer_id) REFERENCES customers(id) |
+|    );                                                    |
+|__________________________________________________________|
+Here, customer_id in the orders table is a foreign key that links to the id column in the customers table.
+
+
+📌 Types of Relationships
+
+✅ 1. One-to-One (1:1)
+Each record in Table A is related to only one record in Table B.
+👉 Example: A user has one profile.
+ _________________________________________________
+|  CREATE TABLE users (                           |
+|      id INT PRIMARY KEY,                        |  
+|      name VARCHAR(50)                           |
+|  );                                             |  
+|                                                 |
+|  CREATE TABLE profiles (                        |
+|      user_id INT PRIMARY KEY,                   |   
+|      bio TEXT,                                  |
+|      FOREIGN KEY (user_id) REFERENCES users(id) | 
+|  );                                             | 
+|_________________________________________________|
+
+
+✅ 2. One-to-Many (1:M)
+One record in Table A is related to many records in Table B.
+👉 Example: A customer can place multiple orders.
+ _________________________________________________________
+|  CREATE TABLE customers (                               |
+|      id INT PRIMARY KEY,                                |
+|      name VARCHAR(50)                                   |
+|  );                                                     |
+|                                                         |     
+|  CREATE TABLE orders (                                  |      
+|      id INT PRIMARY KEY,                                |
+|      customer_id INT,                                   |
+|      order_date DATE,                                   |
+|      FOREIGN KEY (customer_id) REFERENCES customers(id) |
+|  );                                                     |
+|_________________________________________________________|
+
+
+✅ 3. Many-to-Many (M:M)
+Multiple records in Table A can be related to multiple records in Table B.
+👉 Example: A student can enroll in many courses, and a course can have many students.
+
+To implement this, we use a junction table.
+ _________________________________________________________________
+|      id INT PRIMARY KEY,                                        |  
+|      name VARCHAR(50)                                           |
+|  );                                                             |
+|                                                                 | 
+|  CREATE TABLE courses (                                         |
+|      id INT PRIMARY KEY,                                        |
+|      title VARCHAR(100)                                         |
+|  );                                                             |
+|                                                                 | 
+|  CREATE TABLE student_courses (                                 |
+|      student_id INT,                                            |  
+|      course_id INT,                                             |
+|      PRIMARY KEY (student_id, course_id),                       |
+|      FOREIGN KEY (student_id) REFERENCES students(id),          |
+|      FOREIGN KEY (course_id) REFERENCES courses(id)             |
+|  );                                                             |
+|_________________________________________________________________|
+
+
+📌 Implementing Relationships Using JOIN
+A JOIN allows us to retrieve related data from multiple tables.
+
+✅ INNER JOIN (Returns only matching records in both tables)
+ ____________________________________________________________
+|  SELECT customers.name, orders.order_date                  |   
+|  FROM customers                                            |
+|  INNER JOIN orders ON customers.id = orders.customer_id;   |
+|____________________________________________________________|
+
+
+✅ LEFT JOIN (Returns all records from the left table and matching records from the right)
+ _________________________________________________________
+|  SELECT customers.name, orders.order_date               |  
+|  FROM customers                                         | 
+|  LEFT JOIN orders ON customers.id = orders.customer_id; |
+|_________________________________________________________|
+
+✅ RIGHT JOIN (Returns all records from the right table and matching records from the left)
+ __________________________________________________________
+|  SELECT customers.name, orders.order_date                | 
+|  FROM customers                                          |
+|  RIGHT JOIN orders ON customers.id = orders.customer_id; |  
+|__________________________________________________________|
+
+✅ FULL OUTER JOIN (Returns all records when there is a match in either table)
+👉 Note: MySQL doesn’t support FULL OUTER JOIN directly, but you can achieve it using UNION.
+ ___________________________________________________________
+|  SELECT customers.name, orders.order_date                 |      
+|  FROM customers                                           |
+|  LEFT JOIN orders ON customers.id = orders.customer_id    |
+|  UNION                                                    |
+|  SELECT customers.name, orders.order_date                 |
+|  FROM customers                                           | 
+|  RIGHT JOIN orders ON customers.id = orders.customer_id;  |
+|___________________________________________________________|
