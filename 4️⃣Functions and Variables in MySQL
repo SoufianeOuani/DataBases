@@ -1,0 +1,102 @@
+📌 Using Built-in Functions in MySQL
+MySQL provides several built-in functions to perform operations on data. These functions can be categorized into aggregate functions, string functions, and mathematical functions.
+
+✅ Aggregate Functions (COUNT, SUM, AVG, MIN, MAX)
+Aggregate functions perform calculations on a set of values and return a single value.
+
+1️⃣ COUNT – Count the number of records
+ _______________________________________________________________________________________________________
+|  SELECT COUNT(*) FROM orders;  -- Count total number of orders                                        |    
+|  SELECT COUNT(id) FROM customers WHERE name LIKE 'A%';  -- Count customers whose name starts with 'A' | 
+|_______________________________________________________________________________________________________|
+
+2️⃣ SUM – Calculate the total sum of a column
+ __________________________________________________________________________
+|  SELECT SUM(price) FROM orders;  -- Total sales revenue                  |
+|  SELECT SUM(quantity * price) FROM order_items;  -- Total sales amount   |
+|__________________________________________________________________________|
+
+3️⃣ AVG – Calculate the average value
+ _________________________________________________________________
+|  SELECT AVG(price) FROM products;  -- Average product price     |
+|  SELECT AVG(age) FROM customers;  -- Average age of customers   |
+|_________________________________________________________________|
+
+4️⃣ MIN & MAX – Find the smallest and largest values
+ ________________________________________________________________
+|  SELECT MIN(price) FROM products;  -- Cheapest product         |
+|  SELECT MAX(price) FROM products;  -- Most expensive product   |
+|  SELECT MIN(order_date) FROM orders;  -- First order date      |
+|  SELECT MAX(order_date) FROM orders;  -- Latest order date     |
+|________________________________________________________________|
+
+
+📌 String and Mathematical Functions
+MySQL includes various string manipulation and mathematical functions.
+
+✅ String Functions
+ _________________________________________________________________________________________________________________________
+|  Function	                     |  Description	                          Example                                         |
+|________________________________|________________________________________________________________________________________|
+|  UPPER(str)	                   |  Converts to uppercase	SELECT UPPER('mysql'); -- MYSQL                                 | 
+|________________________________|________________________________________________________________________________________|
+|  LOWER(str)	                   |  Converts to lowercase	SELECT LOWER('MySQL'); -- mysql                                 |
+|________________________________|________________________________________________________________________________________|
+|  CONCAT(str1, str2, …)         |  Joins strings	SELECT CONCAT('Hello', ' ', 'World'); -- Hello World                    |
+|________________________________|________________________________________________________________________________________|
+|  SUBSTRING(str, start, length) |  Extracts a substring	SELECT SUBSTRING('Database', 1, 4); -- Data                     | 
+|________________________________|________________________________________________________________________________________|
+|  LENGTH(str)	                 |  Returns string length	SELECT LENGTH('Hello'); -- 5                                    |
+|________________________________|________________________________________________________________________________________|
+|  TRIM(str)	                   |  Removes spaces	SELECT TRIM(' MySQL '); -- MySQL                                      |  
+|________________________________|________________________________________________________________________________________|
+|  REPLACE(str, from, to) 	     |  Replaces substring	SELECT REPLACE('Hello World', 'World', 'MySQL'); -- Hello MySQL   |
+|________________________________|________________________________________________________________________________________|
+
+
+
+✅ Mathematical Functions
+ ______________________________________________________________________________________________
+|  Function      |       	Description	           |    Example                                  |    
+|________________|_______________________________|_____________________________________________|
+|  ABS(x)	       |        Absolute value         |   	SELECT ABS(-10); -- 10                   | 
+|________________|_______________________________|_____________________________________________|
+|  ROUND(x, d)   |        Rounds number          |  	SELECT ROUND(3.14159, 2); -- 3.14        |
+|________________|_______________________________|_____________________________________________|
+|  CEIL(x)	     |        Rounds up	             |    SELECT CEIL(4.3); -- 5                   | 
+|________________|_______________________________|_____________________________________________|
+|  FLOOR(x)	     |        Rounds down            |  	SELECT FLOOR(4.9); -- 4                  |    
+|________________|_______________________________|_____________________________________________|
+|  SQRT(x)	     |        Square root            |  	SELECT SQRT(16); -- 4                    |
+|________________|_______________________________|_____________________________________________|
+|  MOD(x, y)	   |        Remainder of division  |    SELECT MOD(10, 3); -- 1                  |
+|________________|_______________________________|_____________________________________________|
+|  POWER(x, y)   |        Exponentiation	       |    SELECT POWER(2, 3); -- 8                 |
+|________________|_______________________________|_____________________________________________|
+
+
+
+
+📌 Creating and Storing Variables in MySQL
+✅ Declaring Variables in MySQL
+Variables allow us to temporarily store values and use them in queries.
+
+1️⃣ Using SET to Assign Variables
+ ____________________________________
+|  SET @x = 10;                      |
+|  SET @message = 'Hello, MySQL';    |
+|  SELECT @x, @message;              |
+|____________________________________|
+
+2️⃣ Using SELECT INTO for Query Results
+ ___________________________________________________________
+|  SELECT COUNT(*) INTO @total_customers FROM customers;    |
+|  SELECT @total_customers;  -- Displays total customers    |
+|___________________________________________________________|
+
+3️⃣ Using Variables in Calculations
+ _______________________________________________________
+|  SET @price = 100;                                    |
+|  SET @discount = 0.1;                                 | 
+|  SELECT @price - (@price * @discount) AS FinalPrice;  |
+|_______________________________________________________|
